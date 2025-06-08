@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive CV - Mariam Kamungu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .timeline-item .details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .timeline-item.open .details {
+            max-height: 1000px;
+            transition: max-height 0.7s ease-in;
+        }
+        .timeline-dot::after {
+            content: '';
+            position: absolute;
+            width: 1rem;
+            height: 1rem;
+            background: white;
+            border: 3px solid #0d9488;
+            border-radius: 9999px;
+            left: -0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+        .nav-link {
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: #0d9488;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-slate-800">
+                Mariam Kamungu
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#summary" class="nav-link font-medium">Summary</a>
+                <a href="#skills" class="nav-link font-medium">Skills</a>
+                <a href="#experience" class="nav-link font-medium">Experience</a>
+                <a href="#projects" class="nav-link font-medium">Spotlight</a>
+                <a href="#education" class="nav-link font-medium">Education</a>
+            </div>
+             <div class="md:hidden">
+                <button id="menu-btn" class="text-slate-800 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#summary" class="block py-2 px-4 text-sm hover:bg-slate-100">Summary</a>
+            <a href="#skills" class="block py-2 px-4 text-sm hover:bg-slate-100">Skills</a>
+            <a href="#experience" class="block py-2 px-4 text-sm hover:bg-slate-100">Experience</a>
+            <a href="#projects" class="block py-2 px-4 text-sm hover:bg-slate-100">Spotlight</a>
+            <a href="#education" class="block py-2 px-4 text-sm hover:bg-slate-100">Education</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="summary" class="py-20 md:py-32 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-slate-800 mb-4">Mariam Kamungu</h1>
+                <p class="text-lg md:text-xl text-teal-600 font-medium mb-8">Senior Administrative & Operations Professional</p>
+                <p class="max-w-3xl mx-auto text-slate-600 leading-relaxed">
+                    Highly experienced and results-driven professional with over a decade of success in creating vibrant, efficient, and secure workplace environments. Proven ability to provide comprehensive administrative, facilities, and people-centric support to leadership and global teams, fostering an inclusive culture that attracts and retains talent.
+                </p>
+                <div class="mt-8 text-sm text-slate-500">
+                    <span>+447508506696</span> | <span>mariam.kamungu@gmail.com</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-slate-800 mb-12">Areas of Expertise</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <h3 class="text-xl font-bold text-teal-600 mb-4">Executive & Admin Support</h3>
+                        <p class="text-slate-600">Complex Calendar Management, Global Travel Coordination, Expense Reporting, Document Control, and Confidential Information Handling.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <h3 class="text-xl font-bold text-teal-600 mb-4">Operations & Facilities</h3>
+                        <p class="text-slate-600">Workplace Experience Management, Health & Safety Administration, Vendor & Contractor Management, and Business Continuity Support.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <h3 class="text-xl font-bold text-teal-600 mb-4">Project & Event Coordination</h3>
+                        <p class="text-slate-600">Project Administration, Employee Engagement Initiatives, Team Offsite Coordination, and All-Hands Meeting Logistics.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <h3 class="text-xl font-bold text-teal-600 mb-4">Training & Development</h3>
+                        <p class="text-slate-600">Program Coordination, Induction & Orientation Planning, and New Joiner Training Support.</p>
+                    </div>
+                     <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <h3 class="text-xl font-bold text-teal-600 mb-4">Technical Proficiency</h3>
+                        <p class="text-slate-600">Microsoft Office Suite (Word, Excel, PowerPoint, SharePoint, Teams), SAP Concur, Asite, and AssetWise.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <h3 class="text-xl font-bold text-teal-600 mb-4">HR Administration</h3>
+                        <p class="text-slate-600">Onboarding & Offboarding Processes, Personnel Records Support, Benefits & Entitlements Inquiries.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-slate-800 mb-16">Career Timeline</h2>
+                <div class="relative max-w-3xl mx-auto">
+                    <div class="absolute left-0 h-full border-l-2 border-slate-200"></div>
+                    
+                    <div class="timeline-item mb-12 pl-8 relative cursor-pointer">
+                        <div class="timeline-dot"></div>
+                        <h3 class="text-xl font-bold text-slate-800">Project Administrator</h3>
+                        <p class="text-md font-medium text-teal-600">COWI UK Ltd | Aug 2023 - Present</p>
+                        <div class="details mt-4 text-slate-600 space-y-2">
+                            <p>Drove comprehensive project administration and reporting, ensuring meticulous monitoring of progress to support timely project delivery across all phases of the HS2 and Silvertown projects.</p>
+                            <p>Orchestrated complex logistics for engineers' critical site visits, ensuring seamless and timely arrangements.</p>
+                            <p>Partnered closely with the Finance team to track project invoice payments and manage project-related expenses.</p>
+                            <p>Ensured stringent compliance by meticulously auditing project documentation within control systems like Asite and AssetWise.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item mb-12 pl-8 relative cursor-pointer">
+                        <div class="timeline-dot"></div>
+                        <h3 class="text-xl font-bold text-slate-800">Facilities Coordinator</h3>
+                        <p class="text-md font-medium text-teal-600">COWI UK Ltd | Apr 2022 - Jul 2023</p>
+                        <div class="details mt-4 text-slate-600 space-y-2">
+                            <p>Spearheaded the maintenance of a high-quality, inspiring office environment across multi-site locations, enhancing operational efficiency.</p>
+                            <p>Enhanced workplace safety programs by streamlining the Risk Assessment and Method Statements (RAMS) process.</p>
+                            <p>Managed seamless on- and off-boarding processes, collaborating with IT, HR, and operations teams.</p>
+                        </div>
+                    </div>
+
+                     <div class="timeline-item mb-12 pl-8 relative cursor-pointer">
+                        <div class="timeline-dot"></div>
+                        <h3 class="text-xl font-bold text-slate-800">Operations Team Lead</h3>
+                        <p class="text-md font-medium text-teal-600">COWI UK Ltd | Feb 2021 - Mar 2022</p>
+                        <div class="details mt-4 text-slate-600 space-y-2">
+                           <p>Led the effective and efficient operation of the office and operations team, ensuring full compliance with internal management systems.</p>
+                           <p>Cultivated and managed robust relationships with vendors, service providers, and building management.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item mb-12 pl-8 relative cursor-pointer">
+                        <div class="timeline-dot"></div>
+                        <h3 class="text-xl font-bold text-slate-800">Administration Manager</h3>
+                        <p class="text-md font-medium text-teal-600">COWI UK Ltd | Oct 2018 - Feb 2021</p>
+                        <div class="details mt-4 text-slate-600 space-y-2">
+                            <p>Conducted comprehensive new hire orientations and provided essential health and safety information for a secure workplace.</p>
+                            <p>Managed all office financial administration, processing an average of 10-15 invoices and expense reports weekly.</p>
+                             <p>Coordinated complex global travel and accommodation logistics for numerous employees across 2 offices.</p>
+                             <p>Organized successful office social events, significantly enhancing staff morale and engagement.</p>
+                        </div>
+                    </div>
+
+                     <div class="timeline-item pl-8 relative cursor-pointer">
+                        <div class="timeline-dot"></div>
+                        <h3 class="text-xl font-bold text-slate-800">Previous Experience</h3>
+                        <p class="text-md font-medium text-teal-600">2007 - 2018</p>
+                        <div class="details mt-4 text-slate-600 space-y-2">
+                           <p><strong>Corporate Receptionist/Admin Assistant at Portico:</strong> Managed front-desk activities and visitor access.</p>
+                           <p><strong>HR Administrator at Creative Eye (Tanzania):</strong> Provided comprehensive personnel support and maintained employee records.</p>
+                           <p><strong>Practice Manager at The London Clinic:</strong> Oversaw practice operations and administration.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-20">
+            <div class="container mx-auto px-6">
+                 <h2 class="text-3xl font-bold text-center text-slate-800 mb-12">Project & Achievement Spotlight</h2>
+                 <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <div class="bg-white rounded-lg p-8 shadow-md">
+                        <h3 class="text-2xl font-bold text-teal-600 mb-3">Health & Safety Compliance</h3>
+                        <p class="text-slate-600">Managed health and safety compliance for a multi-site office environment, successfully **reducing potential hazards by 20%** through proactive streamlining of risk assessment processes.</p>
+                    </div>
+                     <div class="bg-white rounded-lg p-8 shadow-md">
+                        <h3 class="text-2xl font-bold text-teal-600 mb-3">Employee Engagement</h3>
+                        <p class="text-slate-600">Planned and executed successful office social events, managing budgets and logistics to **significantly enhance staff morale and engagement** across the organization.</p>
+                    </div>
+                 </div>
+            </div>
+        </section>
+
+        <section id="education" class="py-20 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                 <h2 class="text-3xl font-bold text-slate-800 mb-8">Education & Certificates</h2>
+                 <div class="space-y-4 max-w-xl mx-auto">
+                     <div>
+                        <p class="text-lg font-semibold">Level 6 Diploma in Business Administration</p>
+                        <p class="text-slate-500">Cambridge Management & Leadership School (Expected 2026)</p>
+                     </div>
+                     <div class="flex justify-center space-x-6 pt-4 text-sm font-medium text-teal-700">
+                         <span>First Aid at Work</span>
+                         <span>•</span>
+                         <span>Fire Marshal</span>
+                         <span>•</span>
+                         <span>DSE Assessor</span>
+                     </div>
+                 </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-slate-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Mariam Kamungu. Interactive CV created by an AI assistant.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    item.classList.toggle('open');
+                });
+            });
+
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const navLinks = document.querySelectorAll('#mobile-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
